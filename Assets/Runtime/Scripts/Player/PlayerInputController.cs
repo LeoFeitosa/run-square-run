@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerInputController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool IsJump { get; private set; }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        SetMove();
+    }
+
+    void SetMove()
+    {
+        IsJump = false;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0))
+        {
+            IsJump = true;
+        }
     }
 }

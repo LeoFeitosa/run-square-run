@@ -74,6 +74,6 @@ public class PlayerMovementController : MonoBehaviour
             deltaY = Mathf.Sin(Mathf.PI * jumpPercent) * jumpHeightY;
         }
 
-        return (currentJumps == 0 ? jumpStartY : initialPosition.y) + deltaY;
+        return Mathf.Lerp(jumpStartY, initialPosition.y + deltaY, jumpPercent);
     }
 }

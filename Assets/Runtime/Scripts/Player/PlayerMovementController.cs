@@ -4,15 +4,76 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerInputController playerInput;
+
+    [Header("Movement X")]
+    [SerializeField] float forwardSpeed = 0.5f;
+
+    [Header("Jump")]
+    [SerializeField] int numberOfJumps = 2;
+    [SerializeField] float jumpDistanceX = 4;
+    [SerializeField] float jumpHeightY = 2;
+    float jumpStartX;
+    float jumpStartY;
+    Vector2 initialPosition;
+    int currentJumps;
+
+    void Awake()
     {
-        
+        initialPosition = transform.position;
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        playerInput = GetComponent<PlayerInputController>();
+        currentJumps = numberOfJumps;
+    }
+
+    void FixedUpdate()
+    {
+        MoveForward();
+    }
+
     void Update()
     {
-        
+        ProcessInput();
+        Vector2 position = transform.position;
+        position.y = ProcessJump();
+        transform.position = position;
+    }
+
+    void MoveForward()
+    {
+        Vector2 position = transform.position;
+        position += Vector2.right * forwardSpeed * Time.fixedDeltaTime;
+        transform.position = position;
+    }
+
+    void ProcessInput()
+    {
+        if (playerInput.IsJump && currentJumps > 0)
+        {
+            jumpStartX = transform.position.x;
+            jumpStartY = transform.position.y;
+            currentJumps--;
+        }
+    }
+
+    float ProcessJump()
+    {
+        float deltaY = 0;
+        float jumpCurrentProgress = transform.position.x - jumpStartX;
+        float jumpPercent = jumpCurrentProgress / jumpDistanceX;
+
+        if (jumpPercent >= 1)
+        {
+            currentJumps = numberOfJumps;
+        }
+        else
+        {
+            deltaY = Mathf.Sin(Mathf.PI * jumpPercent) * jumpHeightY;
+        }
+
+        return (currentJumps == 0 ? jumpStartY : initialPosition.y) + deltaY;
     }
 }

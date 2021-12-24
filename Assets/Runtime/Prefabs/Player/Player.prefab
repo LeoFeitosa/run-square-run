@@ -142,7 +142,7 @@ MonoBehaviour:
   forwardSpeed: 4
   numberOfJumps: 2
   jumpDistanceX: 4
-  jumpHeightY: 3
+  jumpHeightY: 3.5
 --- !u!95 &501088196
 Animator:
   serializedVersion: 3

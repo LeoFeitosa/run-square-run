@@ -5,11 +5,12 @@ using UnityEngine;
 public class TrackGenerator : MonoBehaviour
 {
     [SerializeField] TrackSegment[] segmentsPrefab;
+    [SerializeField] TrackSegment segmentPrefabInitial;
     List<TrackSegment> currentSegments = new List<TrackSegment>();
 
     void Start()
     {
-        TrackSegment initialTrack = Instantiate(segmentsPrefab[0], transform);
+        TrackSegment initialTrack = Instantiate(segmentPrefabInitial, transform);
         currentSegments.Add(initialTrack);
 
         TrackSegment previousTrack = initialTrack;
@@ -17,7 +18,6 @@ public class TrackGenerator : MonoBehaviour
         {
             TrackSegment trackInstance = Instantiate(trackPrefab, transform);
             trackInstance.transform.position = previousTrack.End.position + (trackInstance.transform.position - trackInstance.Start.position);
-
 
             currentSegments.Add(initialTrack);
             previousTrack = trackInstance;

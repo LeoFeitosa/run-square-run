@@ -388,10 +388,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentsPrefab:
-  - {fileID: 1521816226266896545, guid: 7874aca1709e5cb4cb6e418fa76c8f50, type: 3}
-  - {fileID: 4985152802508335931, guid: bde1dc4ae86e0974cb9220027b5e9804, type: 3}
-  - {fileID: 2817270515359517863, guid: b2496da096b14cf419ef272adfea57ce, type: 3}
-  - {fileID: 2817270515359517863, guid: 48054a59c5cdfae49a86ec00b103ed17, type: 3}
+  - {fileID: 5129735095169729816, guid: 514fba13d90ffbb439f85f9104021117, type: 3}
+  - {fileID: 5129735095169729816, guid: c5f42049948065645afbd38010d5d988, type: 3}
+  - {fileID: 5129735095169729816, guid: 9f4d99a3e0416164cb5041745f743cfa, type: 3}
+  segmentPrefabInitial: {fileID: 1521816226266896545, guid: 7874aca1709e5cb4cb6e418fa76c8f50, type: 3}
 --- !u!1001 &7987784833487692045
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -128,6 +128,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7987784833697698567, guid: ca34ff6a174fc1847bce576095f0bc85, type: 3}
   m_PrefabInstance: {fileID: 7987784833487692045}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &501088196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2360772487135236126, guid: ca34ff6a174fc1847bce576095f0bc85, type: 3}
+  m_PrefabInstance: {fileID: 7987784833487692045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501088195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978f4b6d3b960b54881c4afdf863fecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &507182643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,11 +398,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b453684f6e0074bb17426d44bdd5c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentsPrefab:
-  - {fileID: 5129735095169729816, guid: 514fba13d90ffbb439f85f9104021117, type: 3}
-  - {fileID: 5129735095169729816, guid: c5f42049948065645afbd38010d5d988, type: 3}
-  - {fileID: 5129735095169729816, guid: 9f4d99a3e0416164cb5041745f743cfa, type: 3}
+  player: {fileID: 501088196}
+  segmentPrefabEasy: {fileID: 5129735095169729816, guid: 514fba13d90ffbb439f85f9104021117, type: 3}
+  segmentPrefabMedium: {fileID: 5129735095169729816, guid: c5f42049948065645afbd38010d5d988, type: 3}
+  segmentPrefabHard: {fileID: 5129735095169729816, guid: 9f4d99a3e0416164cb5041745f743cfa, type: 3}
+  hardTackChance: 0.3
   segmentPrefabInitial: {fileID: 1521816226266896545, guid: 7874aca1709e5cb4cb6e418fa76c8f50, type: 3}
+  initialTrackCount: 4
+  minTracksInFrontPlayer: 1
+  distanceToCosiderTack: 6
 --- !u!1001 &7987784833487692045
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovementController))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimatorController : MonoBehaviour
 {
+    PlayerMovementController player;
     Animator anim;
-    void Start()
+    void Awake()
     {
+        player = GetComponent<PlayerMovementController>();
         anim = GetComponent<Animator>();
     }
 
-    public void AnimRotate()
+    void Update()
     {
-        anim.SetTrigger("rotate");
+        AnimRotate();
+    }
+
+    void AnimRotate()
+    {
+        anim.SetBool("rotate", player.IsJumping);
     }
 }

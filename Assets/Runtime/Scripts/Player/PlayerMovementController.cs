@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     PlayerInputController playerInput;
-    PlayerAnimatorController playerAnim;
 
     [Header("Movement X")]
     [SerializeField] float forwardSpeed = 0.5f;
@@ -18,6 +17,8 @@ public class PlayerMovementController : MonoBehaviour
     float jumpStartY;
     Vector2 initialPosition;
     int currentJumps;
+    public bool IsJumping { get; private set; }
+    public float JumpDuration => jumpDistanceX / forwardSpeed;
 
     void Awake()
     {
@@ -27,7 +28,6 @@ public class PlayerMovementController : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<PlayerInputController>();
-        playerAnim = GetComponent<PlayerAnimatorController>();
         currentJumps = numberOfJumps;
     }
 
@@ -53,12 +53,14 @@ public class PlayerMovementController : MonoBehaviour
 
     void ProcessInput()
     {
+        IsJumping = false;
+
         if (playerInput.IsJump && currentJumps > 0)
         {
             jumpStartX = transform.position.x;
             jumpStartY = transform.position.y;
             currentJumps--;
-            playerAnim.AnimRotate();
+            IsJumping = true;
         }
     }
 

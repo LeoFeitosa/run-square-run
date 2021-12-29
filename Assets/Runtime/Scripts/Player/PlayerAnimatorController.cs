@@ -21,6 +21,11 @@ public class PlayerAnimatorController : MonoBehaviour
 
     void AnimRotate()
     {
-        anim.SetBool("rotate", player.IsJumping);
+        if (player.IsJumping)
+        {
+            anim.SetTrigger("rotate");
+        }
+
+        anim.SetBool("run", player.IsRun);
     }
 }

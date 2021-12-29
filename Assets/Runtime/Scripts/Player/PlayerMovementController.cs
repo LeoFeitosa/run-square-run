@@ -18,6 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     Vector2 initialPosition;
     int currentJumps;
     public bool IsJumping { get; private set; }
+    public bool IsRun { get; private set; }
     public float JumpDuration => jumpDistanceX / forwardSpeed;
 
     void Awake()
@@ -61,6 +62,7 @@ public class PlayerMovementController : MonoBehaviour
             jumpStartY = transform.position.y;
             currentJumps--;
             IsJumping = true;
+            IsRun = false;
         }
     }
 
@@ -73,6 +75,7 @@ public class PlayerMovementController : MonoBehaviour
         if (jumpPercent >= 1)
         {
             currentJumps = numberOfJumps;
+            IsRun = true;
         }
         else
         {

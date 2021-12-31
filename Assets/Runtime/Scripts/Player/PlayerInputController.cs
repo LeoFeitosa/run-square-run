@@ -13,6 +13,11 @@ public class PlayerInputController : MonoBehaviour
 
     void SetMove()
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         IsJump = false;
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0))

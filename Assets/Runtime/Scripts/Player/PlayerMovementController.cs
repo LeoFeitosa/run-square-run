@@ -20,6 +20,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsRun { get; private set; }
     public float JumpDuration => jumpDistanceX / forwardSpeed;
+    bool stopMove = false;
 
     void Awake()
     {
@@ -47,6 +48,11 @@ public class PlayerMovementController : MonoBehaviour
 
     void MoveForward()
     {
+        if (stopMove)
+        {
+            return;
+        }
+
         Vector2 position = transform.position;
         position += Vector2.right * forwardSpeed * Time.fixedDeltaTime;
         transform.position = position;
@@ -56,7 +62,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         IsJumping = false;
 
-        if (playerInput.IsJump && currentJumps > 0)
+        if (playerInput.IsJump && currentJumps > 0 && !stopMove)
         {
             jumpStartX = transform.position.x;
             jumpStartY = transform.position.y;
@@ -83,5 +89,10 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         return Mathf.Lerp(jumpStartY, initialPosition.y + deltaY, jumpPercent);
+    }
+
+    public void StopMove()
+    {
+        stopMove = true;
     }
 }

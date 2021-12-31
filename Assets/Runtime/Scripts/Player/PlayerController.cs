@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class PlayerController : MonoBehaviour
 {
+    GameOverController gameOver;
     PlayerMovementController playerMovement;
     ParticleSystem particles;
     SpriteRenderer[] spriteRenderer;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        gameOver = FindObjectOfType<GameOverController>();
         playerMovement = GetComponent<PlayerMovementController>();
         particles = GetComponent<ParticleSystem>();
         spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        gameOver.GetComponent<Canvas>().enabled = true;
         boxCollider2D.enabled = false;
 
         foreach (var render in spriteRenderer)

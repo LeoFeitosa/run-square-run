@@ -402,7 +402,7 @@ MonoBehaviour:
   segmentPrefabEasy: {fileID: 5129735095169729816, guid: 514fba13d90ffbb439f85f9104021117, type: 3}
   segmentPrefabMedium: {fileID: 5129735095169729816, guid: c5f42049948065645afbd38010d5d988, type: 3}
   segmentPrefabHard: {fileID: 5129735095169729816, guid: 9f4d99a3e0416164cb5041745f743cfa, type: 3}
-  hardTackChance: 0.3
+  hardTackChance: 0.6
   segmentPrefabInitial: {fileID: 1521816226266896545, guid: 7874aca1709e5cb4cb6e418fa76c8f50, type: 3}
   initialTrackCount: 4
   minTracksInFrontPlayer: 1

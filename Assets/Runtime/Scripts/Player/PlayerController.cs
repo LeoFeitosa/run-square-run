@@ -36,11 +36,16 @@ public class PlayerController : MonoBehaviour
         gameOver.GetComponent<Canvas>().enabled = true;
         boxCollider2D.enabled = false;
 
+        DisableSpriteRenderer();
+
+        playerMovement.StopMove();
+    }
+
+    void DisableSpriteRenderer()
+    {
         foreach (var render in spriteRenderer)
         {
             render.enabled = false;
         }
-
-        playerMovement.StopMove();
     }
 }

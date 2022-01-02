@@ -6,21 +6,27 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class ObstacleController : MonoBehaviour
 {
+    ScoreController scoreController;
     ParticleSystem particles;
-    SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider2D;
+    SpriteRenderer[] spriteRenderer;
     [SerializeField] float raycastSize = 3;
+    [SerializeField] Transform transformRaycast;
+    [SerializeField] int score;
 
     void Awake()
     {
         particles = GetComponent<ParticleSystem>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        scoreController = GetComponent<ScoreController>();
     }
 
     void Start()
     {
-        spriteRenderer.color = RandomColors();
+        spriteRenderer[0].color = RandomColors();
         var main = particles.main;
-        main.startColor = spriteRenderer.color;
+        main.startColor = spriteRenderer[0].color;
     }
 
     void Update()
@@ -30,15 +36,29 @@ public class ObstacleController : MonoBehaviour
 
     void CheckRaycast()
     {
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), raycastSize, LayerMask.GetMask("Player"));
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.up) * raycastSize, Color.yellow);
+        RaycastHit2D hitUp = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.up), raycastSize, LayerMask.GetMask("Player"));
+        Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.up) * raycastSize, Color.yellow);
 
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), raycastSize, LayerMask.GetMask("Player"));
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.down) * raycastSize, Color.yellow);
+        RaycastHit2D hitDown = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.down), raycastSize, LayerMask.GetMask("Player"));
+        Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.down) * raycastSize, Color.yellow);
 
         if (hitUp.collider || hitDown.collider)
         {
+            boxCollider2D.enabled = false;
+
+            DisableSpriteRenderer();
             particles.Play();
+
+            scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
+            scoreController.SetScore(score);
+        }
+    }
+
+    void DisableSpriteRenderer()
+    {
+        foreach (var render in spriteRenderer)
+        {
+            render.enabled = false;
         }
     }
 

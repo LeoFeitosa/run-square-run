@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
@@ -13,6 +14,7 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] float raycastSize = 3;
     [SerializeField] Transform transformRaycast;
     [SerializeField] int score;
+    bool hitRaycast = false;
 
     void Awake()
     {
@@ -36,21 +38,25 @@ public class ObstacleController : MonoBehaviour
 
     void CheckRaycast()
     {
-        RaycastHit2D hitUp = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.up), raycastSize, LayerMask.GetMask("Player"));
-        Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.up) * raycastSize, Color.yellow);
-
-        RaycastHit2D hitDown = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.down), raycastSize, LayerMask.GetMask("Player"));
-        Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.down) * raycastSize, Color.yellow);
-
-        if (hitUp.collider || hitDown.collider)
+        if (!hitRaycast)
         {
-            boxCollider2D.enabled = false;
+            RaycastHit2D hitUp = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.up), raycastSize, LayerMask.GetMask("Player"));
+            Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.up) * raycastSize, Color.yellow);
 
-            DisableSpriteRenderer();
-            particles.Play();
+            RaycastHit2D hitDown = Physics2D.Raycast(transformRaycast.position, transform.TransformDirection(Vector2.down), raycastSize, LayerMask.GetMask("Player"));
+            Debug.DrawRay(transformRaycast.position, transform.TransformDirection(Vector2.down) * raycastSize, Color.yellow);
 
-            scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
-            scoreController.SetScore(score);
+            if (hitUp.collider || hitDown.collider)
+            {
+                hitRaycast = true;
+                boxCollider2D.enabled = false;
+
+                DisableSpriteRenderer();
+                particles.Play();
+
+                scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
+                scoreController.SetScore(score);
+            }
         }
     }
 

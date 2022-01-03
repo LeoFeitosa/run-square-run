@@ -1215,6 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreNumbers: {fileID: 1549689482}
+  speed: 0.068
 --- !u!1 &2085773192
 GameObject:
   m_ObjectHideFlags: 0

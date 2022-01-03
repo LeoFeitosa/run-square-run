@@ -215,6 +215,12 @@ MonoBehaviour:
   score: 3
   scorePopUpPrefab: {fileID: 1577839189558305724, guid: 91713975c456fff4199dee0357ff738c, type: 3}
   forceImpulseScore: 12
+  explosions:
+  - {fileID: 8300000, guid: a91a8f4ad6662d84e960499c24ffb8b3, type: 3}
+  - {fileID: 8300000, guid: 0aae1602a9996744c94ea03890329744, type: 3}
+  - {fileID: 8300000, guid: 1b91448d580e3504f96f44ff46a489fa, type: 3}
+  - {fileID: 8300000, guid: 816acb435df696241ac355f7c2b1b6f5, type: 3}
+  - {fileID: 8300000, guid: 73e1a812a498ba147abd87cd1fa0e37d, type: 3}
 --- !u!198 &8458004030376106392
 ParticleSystem:
   m_ObjectHideFlags: 0

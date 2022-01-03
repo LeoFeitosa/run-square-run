@@ -12,12 +12,18 @@ public class ObstacleController : MonoBehaviour
     ParticleSystem particles;
     BoxCollider2D boxCollider2D;
     SpriteRenderer[] spriteRenderer;
+
+    [Header("Colliders")]
     [SerializeField] float raycastSize = 3;
     [SerializeField] Transform transformRaycast;
+
+    [Header("Score")]
     [SerializeField] int score;
     [SerializeField] GameObject scorePopUpPrefab;
     [SerializeField] float forceImpulseScore = 1f;
     bool hitRaycast = false;
+    [Header("SFX")]
+    [SerializeField] AudioClip[] explosions;
 
     void Awake()
     {
@@ -52,12 +58,11 @@ public class ObstacleController : MonoBehaviour
             if (hitUp.collider || hitDown.collider)
             {
                 hitRaycast = true;
-
                 boxCollider2D.enabled = false;
 
+                PlayRandomSfxExplosion();
                 DisableSpriteRenderer();
                 particles.Play();
-
                 SetTextInPopUp();
 
                 scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
@@ -90,5 +95,12 @@ public class ObstacleController : MonoBehaviour
         scorePopUp.GetComponentInChildren<TextMeshPro>().text = score.ToString();
         scorePopUp.GetComponent<Rigidbody2D>().AddForce(transform.up * forceImpulseScore, ForceMode2D.Impulse);
         Destroy(scorePopUp.gameObject, 1);
+    }
+
+    void PlayRandomSfxExplosion()
+    {
+        AudioClip sxf = explosions[Random.Range(0, explosions.Length)];
+        Debug.Log(sxf.name);
+        AudioController.Instance.PlayAudioCue(sxf);
     }
 }

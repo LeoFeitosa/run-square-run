@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] float raycastSize = 3;
     [SerializeField] Transform transformRaycast;
     [SerializeField] int score;
+    [SerializeField] GameObject scorePopUpPrefab;
+    [SerializeField] float forceImpulseScore = 1f;
     bool hitRaycast = false;
 
     void Awake()
@@ -49,10 +52,13 @@ public class ObstacleController : MonoBehaviour
             if (hitUp.collider || hitDown.collider)
             {
                 hitRaycast = true;
+
                 boxCollider2D.enabled = false;
 
                 DisableSpriteRenderer();
                 particles.Play();
+
+                SetTextInPopUp();
 
                 scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
                 scoreController.SetScore(score);
@@ -76,5 +82,13 @@ public class ObstacleController : MonoBehaviour
             Random.Range(0f, 1f), //Blue
             1 //Alpha (transparency)
         );
+    }
+
+    void SetTextInPopUp()
+    {
+        GameObject scorePopUp = Instantiate(scorePopUpPrefab, transform.position, Quaternion.identity);
+        scorePopUp.GetComponentInChildren<TextMeshPro>().text = score.ToString();
+        scorePopUp.GetComponent<Rigidbody2D>().AddForce(transform.up * forceImpulseScore, ForceMode2D.Impulse);
+        Destroy(scorePopUp.gameObject, 1);
     }
 }

@@ -213,6 +213,8 @@ MonoBehaviour:
   raycastSize: 4
   transformRaycast: {fileID: 403478436992687820}
   score: 3
+  scorePopUpPrefab: {fileID: 1577839189558305724, guid: 91713975c456fff4199dee0357ff738c, type: 3}
+  forceImpulseScore: 12
 --- !u!198 &8458004030376106392
 ParticleSystem:
   m_ObjectHideFlags: 0

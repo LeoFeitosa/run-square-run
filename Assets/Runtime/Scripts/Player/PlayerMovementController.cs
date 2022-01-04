@@ -35,9 +35,13 @@ public class PlayerMovementController : MonoBehaviour
         currentJumps = numberOfJumps;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MoveForward();
+    }
+
+    void Update()
+    {
         ProcessInput();
         Vector2 position = transform.position;
         position.y = ProcessJump();
@@ -52,7 +56,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         Vector2 position = transform.position;
-        position += Vector2.right * forwardSpeed * Time.deltaTime;
+        position += Vector2.right * forwardSpeed * Time.fixedDeltaTime;
         transform.position = position;
     }
 

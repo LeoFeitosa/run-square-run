@@ -13,6 +13,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] int numberOfJumps = 2;
     [SerializeField] float jumpDistanceX = 4;
     [SerializeField] float jumpHeightY = 2;
+
+    [Header("SFX")]
+    [SerializeField] AudioClip sxfJump;
     float jumpStartX;
     float jumpStartY;
     Vector2 initialPosition;
@@ -64,6 +67,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (playerInput.IsJump && currentJumps > 0 && !stopMove)
         {
+            PlaySfxJump();
             jumpStartX = transform.position.x;
             jumpStartY = transform.position.y;
             currentJumps--;
@@ -94,5 +98,13 @@ public class PlayerMovementController : MonoBehaviour
     public void StopMove()
     {
         stopMove = true;
+    }
+
+    void PlaySfxJump()
+    {
+        if (sxfJump)
+        {
+            AudioController.Instance.PlayAudioCue(sxfJump);
+        }
     }
 }

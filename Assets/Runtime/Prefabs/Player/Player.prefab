@@ -169,6 +169,7 @@ MonoBehaviour:
   numberOfJumps: 2
   jumpDistanceX: 4
   jumpHeightY: 3.5
+  sxfJump: {fileID: 8300000, guid: 27dd8100d1cb0d5419f8024826c6a6ed, type: 3}
 --- !u!95 &501088196
 Animator:
   serializedVersion: 3
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978f4b6d3b960b54881c4afdf863fecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sxfDie: {fileID: 8300000, guid: 64b9cdd66021c81459583b087e8640bc, type: 3}
 --- !u!96 &501088197
 TrailRenderer:
   serializedVersion: 2

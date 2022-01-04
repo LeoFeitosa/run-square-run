@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     ParticleSystem particles;
     SpriteRenderer[] spriteRenderer;
     BoxCollider2D boxCollider2D;
+    [Header("SFX")]
+    [SerializeField] AudioClip sxfDie;
 
     void Awake()
     {
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        PlaySfxDie();
+
         gameOver.GetComponent<Canvas>().enabled = true;
         boxCollider2D.enabled = false;
 
@@ -46,6 +50,14 @@ public class PlayerController : MonoBehaviour
         foreach (var render in spriteRenderer)
         {
             render.enabled = false;
+        }
+    }
+
+    void PlaySfxDie()
+    {
+        if (sxfDie)
+        {
+            AudioController.Instance.PlayAudioCue(sxfDie);
         }
     }
 }

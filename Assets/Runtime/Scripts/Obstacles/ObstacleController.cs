@@ -63,7 +63,7 @@ public class ObstacleController : MonoBehaviour
                 DisableSpriteRenderer();
                 PlayRandomSfxExplosion();
                 particles.Play();
-                ShaceScreen();
+                ShakeScreen();
                 SetTextInPopUp();
 
                 scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
@@ -103,12 +103,11 @@ public class ObstacleController : MonoBehaviour
         if (explosions.Length > 0)
         {
             AudioClip sxf = explosions[Random.Range(0, explosions.Length)];
-            Debug.Log(sxf.name);
             AudioController.Instance.PlayAudioCue(sxf);
         }
     }
 
-    void ShaceScreen()
+    void ShakeScreen()
     {
         ShakeScreenController.Instance.ShakeNow();
     }

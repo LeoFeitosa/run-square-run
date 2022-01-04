@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
@@ -104,9 +101,9 @@ public class ObstacleController : MonoBehaviour
     Color RandomColors()
     {
         return new Color(
-            Random.value, //Red
-            Random.value, //Green
-            Random.value, //Blue
+            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Red
+            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Green
+            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Blue
             1 //Alpha (transparency)
         );
     }

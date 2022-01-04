@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
@@ -37,13 +35,9 @@ public class PlayerMovementController : MonoBehaviour
         currentJumps = numberOfJumps;
     }
 
-    void FixedUpdate()
-    {
-        MoveForward();
-    }
-
     void Update()
     {
+        MoveForward();
         ProcessInput();
         Vector2 position = transform.position;
         position.y = ProcessJump();
@@ -58,7 +52,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         Vector2 position = transform.position;
-        position += Vector2.right * forwardSpeed * Time.fixedDeltaTime;
+        position += Vector2.right * forwardSpeed * Time.deltaTime;
         transform.position = position;
     }
 

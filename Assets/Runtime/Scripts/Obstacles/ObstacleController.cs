@@ -21,7 +21,8 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] int score;
     [SerializeField] GameObject scorePopUpPrefab;
     [SerializeField] float forceImpulseScore = 1f;
-    bool hitRaycast = false;
+    bool hitRaycast;
+    bool visualExplosion;
     [Header("SFX")]
     [SerializeField] AudioClip[] explosions;
 
@@ -30,19 +31,26 @@ public class ObstacleController : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        scoreController = GetComponent<ScoreController>();
+        scoreController = FindObjectOfType<ScoreController>();
     }
 
     void Start()
     {
+        hitRaycast = false;
+        visualExplosion = false;
         spriteRenderer[0].color = RandomColors();
         var main = particles.main;
         main.startColor = spriteRenderer[0].color;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         CheckRaycast();
+    }
+
+    void LateUpdate()
+    {
+        VisualEffectExplosion();
     }
 
     void CheckRaycast()
@@ -58,17 +66,25 @@ public class ObstacleController : MonoBehaviour
             if (hitUp.collider || hitDown.collider)
             {
                 hitRaycast = true;
+                visualExplosion = true;
+
                 boxCollider2D.enabled = false;
 
                 DisableSpriteRenderer();
                 PlayRandomSfxExplosion();
-                particles.Play();
-                ShakeScreen();
-                SetTextInPopUp();
-
-                scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
-                scoreController.SetScore(score);
             }
+        }
+    }
+
+    void VisualEffectExplosion()
+    {
+        if (visualExplosion)
+        {
+            visualExplosion = false;
+            ShakeScreen();
+            SetTextInPopUp();
+            particles.Play();
+            scoreController.SetScore(score);
         }
     }
 

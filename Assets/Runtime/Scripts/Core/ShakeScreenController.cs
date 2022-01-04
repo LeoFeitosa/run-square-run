@@ -7,7 +7,7 @@ public class ShakeScreenController : MonoBehaviour
 {
     public static ShakeScreenController Instance;
     Transform cameraTransform;
-    bool shakeStart = false;
+    bool shakeStart;
     [SerializeField] float shakeDuration = 0;
     [SerializeField] float shakeMagnitude = 0.7f;
 
@@ -29,6 +29,11 @@ public class ShakeScreenController : MonoBehaviour
         {
             cameraTransform = GetComponent<Transform>();
         }
+    }
+
+    void Start()
+    {
+        shakeStart = false;
     }
 
     void Update()

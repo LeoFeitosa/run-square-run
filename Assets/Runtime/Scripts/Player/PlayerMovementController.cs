@@ -23,7 +23,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsRun { get; private set; }
     public float JumpDuration => jumpDistanceX / forwardSpeed;
-    bool stopMove = false;
+    bool stopMove;
 
     void Awake()
     {
@@ -32,6 +32,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Start()
     {
+        stopMove = false;
         playerInput = GetComponent<PlayerInputController>();
         currentJumps = numberOfJumps;
     }

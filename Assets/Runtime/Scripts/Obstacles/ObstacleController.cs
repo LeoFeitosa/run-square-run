@@ -73,6 +73,11 @@ public class ObstacleController : MonoBehaviour
                 DisableSpriteRenderer();
                 PlayRandomSfxExplosion();
             }
+
+            if (hitUp.collider)
+            {
+                score = score * 2;
+            }
         }
     }
 
@@ -82,7 +87,7 @@ public class ObstacleController : MonoBehaviour
         {
             visualExplosion = false;
             ShakeScreen();
-            SetTextInPopUp();
+            SetTextInPopUp(score);
             particles.Play();
             scoreController.SetScore(score);
         }
@@ -106,10 +111,10 @@ public class ObstacleController : MonoBehaviour
         );
     }
 
-    void SetTextInPopUp()
+    void SetTextInPopUp(int scoreNumber)
     {
         GameObject scorePopUp = Instantiate(scorePopUpPrefab, transform.position, Quaternion.identity);
-        scorePopUp.GetComponentInChildren<TextMeshPro>().text = score.ToString();
+        scorePopUp.GetComponentInChildren<TextMeshPro>().text = scoreNumber.ToString();
         scorePopUp.GetComponent<Rigidbody2D>().AddForce(transform.up * forceImpulseScore, ForceMode2D.Impulse);
         Destroy(scorePopUp.gameObject, 1);
     }

@@ -60,9 +60,10 @@ public class ObstacleController : MonoBehaviour
                 hitRaycast = true;
                 boxCollider2D.enabled = false;
 
-                PlayRandomSfxExplosion();
                 DisableSpriteRenderer();
+                PlayRandomSfxExplosion();
                 particles.Play();
+                ShaceScreen();
                 SetTextInPopUp();
 
                 scoreController = scoreController ? scoreController : FindObjectOfType<ScoreController>();
@@ -99,8 +100,16 @@ public class ObstacleController : MonoBehaviour
 
     void PlayRandomSfxExplosion()
     {
-        AudioClip sxf = explosions[Random.Range(0, explosions.Length)];
-        Debug.Log(sxf.name);
-        AudioController.Instance.PlayAudioCue(sxf);
+        if (explosions.Length > 0)
+        {
+            AudioClip sxf = explosions[Random.Range(0, explosions.Length)];
+            Debug.Log(sxf.name);
+            AudioController.Instance.PlayAudioCue(sxf);
+        }
+    }
+
+    void ShaceScreen()
+    {
+        ShakeScreenController.Instance.ShakeNow();
     }
 }

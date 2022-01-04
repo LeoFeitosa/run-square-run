@@ -99,9 +99,9 @@ public class ObstacleController : MonoBehaviour
     Color RandomColors()
     {
         return new Color(
-            Random.Range(0f, 1f), //Red
-            Random.Range(0f, 1f), //Green
-            Random.Range(0f, 1f), //Blue
+            Random.value, //Red
+            Random.value, //Green
+            Random.value, //Blue
             1 //Alpha (transparency)
         );
     }

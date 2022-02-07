@@ -100,12 +100,7 @@ public class ObstacleController : MonoBehaviour
 
     Color RandomColors()
     {
-        return new Color(
-            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Red
-            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Green
-            Random.value > 0.5f ? Random.Range(0.5f, 1f) : Random.Range(0.3f, 0.5f), //Blue
-            1 //Alpha (transparency)
-        );
+        return Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1, 1);
     }
 
     void SetTextInPopUp(int scoreNumber)
